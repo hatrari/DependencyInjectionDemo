@@ -2,11 +2,20 @@
 
 namespace DependencyInjectionDemo
 {
-    class Program
+  class Program
+  {
+    static void Main(string[] args)
     {
-        static void Main(string[] args)
-        {
-            Console.WriteLine("Hello World!");
-        }
+      DependencyInject();
     }
+    static void DependencyInject()
+    {
+      ILogger logger = new TextFileLogger();
+      Worker di = new Worker(logger);
+      di.DoSomeWork(logger);
+      logger = new ConsoleLogger();
+      di = new Worker(logger);
+      di.DoSomeWork(logger);
+    }
+  }
 }
